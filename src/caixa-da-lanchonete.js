@@ -29,6 +29,13 @@ class CaixaDaLanchonete {
         let cont = 0;
         for (const item of itens) {
             let [produto, quantidade] = item.split(',');
+
+            if(quantidade == 0){
+
+                resumoDaCompra.push("Quantidade inválida!")
+                break;
+            }
+
             const verificadorDeItem = cardapio.some((itemDoCaradpio)=>{
                 return itemDoCaradpio.codigo === produto;
             })
@@ -47,11 +54,25 @@ class CaixaDaLanchonete {
             }      
         }
         const verificadorDeItemInvalido = resumoDaCompra.find((itemDaCompra)=>{
+            
             return itemDaCompra === "Item inválido!";
+            
         });
+        const verificadorDeItemZero = resumoDaCompra.find((itemDaCompra)=>{
+            
+            return itemDaCompra === "Quantidade inválida!";
+            
+        })
 
+        if(verificadorDeItemZero){
+
+            return "Quantidade inválida!";
+            
+        }
         if (verificadorDeItemInvalido){
+            
             return "Item inválido!"
+            
         }   
 
         function valorDaCompra (resumoDaCompra){
